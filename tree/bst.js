@@ -69,5 +69,27 @@ var sortedArrayToBST = function(nums) {
     return head
 };
 
-const a = (sortedArrayToBST([-10,-3,0,5,9]))
-a
+
+function count(head){
+    if(head == null){
+        return 0
+    }
+    const leftTree =  count(head.left) 
+    const rightTree = count(head.right) 
+    return leftTree+rightTree+1
+}
+const a = (sortedArrayToBST([11,9,8,10,13,12,14]))
+// a
+// let c=count(a)
+// c
+
+function sum(head){
+    if(head == null){
+        return 0
+    }
+    const leftTree = sum(head.left)
+    const rightTree = sum(head.right)
+    return leftTree+rightTree+head.val
+}
+let s=sum(a)
+s
