@@ -83,7 +83,7 @@ class BinarySearchTree{
         return re
 
     }
-    // https://leetcode.com/problems/path-sum-iii/
+
     hasPathSum(root,targetSum){
             const re = []
             let check = false
@@ -104,50 +104,35 @@ class BinarySearchTree{
             traverse(root,[])
         return check
     }
+    // https://leetcode.com/problems/sum-root-to-leaf-numbers/
+    sumNumbers(root){
+        let arr= []
+        function traverse(root,path){
+            if(root === null){
+                return null
+            }
+            path = path+(root.val)
+            const left = traverse(root.left,path)
+            const right = traverse(root.right,path)
+            if(left === null && right === null){
+                arr.push(Number(path))
+            }
+            return arr.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+        }
+        return (traverse(root,''))
+    }
+
 }
 // const arr = [8,5,3,1,4,6,10,11,14]
-const arr = [8,5]
+// const arr = [2,1,3]
+const arr = [10,5,-3,3,2,null,11,3,-2,null,1]
 const bst = new BinarySearchTree()
 bst.addHelper(arr,bst)
 // const paths = bst.binaryTreePaths(bst.head)
 // paths
-const paths = bst.hasPathSum(bst.head,8)
+bst.head
+const sum = bst.pathsum2(bst.head,8)
 
-paths
+sum
 // const flag = bst.search(bst.head,100)
 //   flag
-/**
- 
-
-Initial call: bst.add(bst.head, 5)
-   |
-   v
-add(null, 5) -> creates Node(5) and returns Node(5) to bst.head
-   |
-   v
-Next call: bst.add(bst.head, 1)
-   |
-   v
-add(Node(5), 1) -> calls add(root.left, 1)
-   |
-   v
-   add(null, 1) -> creates Node(1) and returns Node(1) to root.left of Node(5)
-   |                                |
-   |                                v
-   |----------------------------- Node(5) returns itself to bst.head
-                                       |
-                                       v
-Next call: bst.add(bst.head, 3)
-                                       |
-                                       v
-                                   add(Node(5), 3) -> calls add(root.left, 3)
-                                       |
-                                       v
-                                   add(Node(1), 3) -> calls add(root.right, 3)
-                                       |
-                                       v
-                                   add(null, 3) -> creates Node(3) and returns Node(3) to root.right of Node(1)
-
-
-
- */
